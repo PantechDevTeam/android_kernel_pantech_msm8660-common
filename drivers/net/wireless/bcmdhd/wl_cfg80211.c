@@ -6191,7 +6191,9 @@ static s32 wl_setup_wiphy(struct wireless_dev *wdev, struct device *sdiofunc_dev
 		  */
 		wdev->wiphy->flags |= WIPHY_FLAG_HAVE_AP_SME;
 #endif
-
+#if defined(CONFIG_PM)
+	wdev->wiphy->wowlan.flags = WIPHY_WOWLAN_ANY;
+#endif
 	WL_DBG(("Registering custom regulatory)\n"));
 	wdev->wiphy->flags |= WIPHY_FLAG_CUSTOM_REGULATORY;
 	wiphy_apply_custom_regulatory(wdev->wiphy, &brcm_regdom);
